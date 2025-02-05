@@ -6,12 +6,14 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "build": "npm ci --only=production"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@redis/client": "^1.6.0",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
     "docker": "^1.0.0",
