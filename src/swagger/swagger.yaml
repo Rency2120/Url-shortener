@@ -142,17 +142,6 @@ paths:
       responses:
         200:
           description: Successfully retrieved long URL
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Long url retrieved successfully"
-                  longUrl:
-                    type: string
-                    example: "https://example.com"
         404:
           description: Short URL not found
 
@@ -176,24 +165,8 @@ paths:
                 $ref: "#/components/schemas/AnalyticsResponse"
         404:
           description: Short URL not found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Short URL not found"
         500:
           description: Server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Server error"
 
   /analytics/topic/{topic}:
     get:
@@ -209,65 +182,10 @@ paths:
       responses:
         200:
           description: Successful response with analytics data
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: true
-                  totalClicks:
-                    type: integer
-                    example: 250
-                  uniqueUsers:
-                    type: integer
-                    example: 180
-                  clicksByDate:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        date:
-                          type: string
-                          example: "2025-02-01"
-                        clicks:
-                          type: integer
-                          example: 25
-                  urls:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        shortUrl:
-                          type: string
-                          example: "http://localhost:5000/abc123"
-                        totalClicks:
-                          type: integer
-                          example: 150
-                        uniqueUsers:
-                          type: integer
-                          example: 120
         404:
           description: No URLs found for this topic
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "No URLs found for this topic"
         500:
           description: Server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Server error"
 
   /analytics/overall:
     get:
@@ -278,27 +196,7 @@ paths:
       responses:
         200:
           description: Successful response with overall analytics data
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AnalyticsResponse"
         404:
           description: No URLs found for this user
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "No URLs found for this user"
         500:
           description: Server error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Server error"

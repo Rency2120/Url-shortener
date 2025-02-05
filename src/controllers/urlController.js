@@ -21,6 +21,7 @@ export const createShortUrl = [
   body("topic").optional().isString().withMessage("Topic must be a string"),
 
   async (req, res) => {
+    console.log("Create Shorten Url");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -29,7 +30,8 @@ export const createShortUrl = [
     try {
       const { longUrl, customAlias, topic } = req.body;
 
-      console.log("user", user);
+      const user = req.session.passport.user;
+
       if (!user) {
         return res
           .status(401)
@@ -43,22 +45,22 @@ export const createShortUrl = [
       }
 
       const alias = customAlias || nanoid(6);
+   
       const shortUrl = `${req.protocol}://${req.get("host")}/${alias}`;
 
-      const newShortUrl = new Url({
+      const newShortUrl = await Url.create({
         longUrl,
         shortUrl,
         alias,
-        user: user._id,
+        user: user,
         topic,
       });
-
-      await newShortUrl.save();
 
       return res.status(200).json({
         message: "Short URL created successfully",
         shortUrl,
         createdAt: newShortUrl.createdAt,
+        newShortUrl,
       });
     } catch (error) {
       res.status(500).json({ message: "Server error", error: error.message });
@@ -67,14 +69,13 @@ export const createShortUrl = [
 ];
 
 export const redirectToOriginalUrl = async (req, res) => {
-
   const { alias } = req.params;
   const cacheKeyUrl = `shorturl:${alias}`;
   const cacheKeyAnalytics = `analytics:${alias}`;
 
   const cachedUrlData = await redisClient.get(cacheKeyUrl);
   if (cachedUrlData) {
- console.log('redis',cacheKeyUrl)
+    console.log("redis", cacheKeyUrl);
     return res.status(200).json({
       message: "Long url retrieved successfully from redis cache",
       longUrl: cachedUrlData,
