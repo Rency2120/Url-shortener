@@ -10,8 +10,7 @@ services:
       - mongo
     environment:
       - MONGO_URI=mongodb://mongo:27017/urlshortener
-      - REDIS_HOST=localhost
-      - REDIS_PORT=6379
+      - REDIS_URL=rediss://red-cuh051rtq21c73f54sq0:cJ1D3NRZashrprvBErmLWnRLjrGheuUN@oregon-redis.render.com:6379
       - PORT=5000
     volumes:
       - .:/app
