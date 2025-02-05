@@ -2,8 +2,8 @@
 
 A feature-rich URL shortening service with real-time analytics, Redis caching, and Google OAuth authentication.
 
-# Live Demo: [https://your-deployment-url.railway.app](https://your-deployment-url.railway.app)  
-# API Documentation: [https://your-deployment-url.railway.app/api-docs](https://your-deployment-url.railway.app/api-docs)
+# Live Demo: https://url-shortener-o037.onrender.com  
+# API Documentation: https://url-shortener-o037.onrender.com/api-docs
 
 ## Features
 
